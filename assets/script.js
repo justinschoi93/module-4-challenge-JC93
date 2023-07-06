@@ -8,38 +8,48 @@ var optionB = document.querySelector(".option-2");
 var optionC = document.querySelector(".option-3");
 var optionD = document.querySelector(".option-4");
 
-var questions = [{
-    number: 1,
-    question: "Question Number 1",
-    a: "option A",
-    b: "option B",
-    c: "option C",
-    d: "option D"}, 
+optionA.addEventListener("click", selectOption);
+optionB.addEventListener("click", selectOption);
+optionC.addEventListener("click", selectOption);
+optionD.addEventListener("click", selectOption);
 
+var questions = [
+    {
+        number: 1,
+        question: "Question Number 1",
+        a: "option A",
+        b: "option B",
+        c: "option C",
+        d: "option D",
+        ans: ""}, 
     {number: 2,
         question: "Question Number 2",
         a: "option A",
         b: "option B",
         c: "option C",
-        d: "option D"},
+        d: "option D",
+        ans: ""},
     {number: 3,
         question: "Question Number 3",
         a: "option A",
         b: "option B",
         c: "option C",
-        d: "option D"},
+        d: "option D",
+        ans: ""},
     {number: 4,
         question: "Question Number 4",
         a: "option A",
         b: "option B",
         c: "option C",
-        d: "option D"},
+        d: "option D",
+        ans: ""},
     {number: 5,
         question: "Question Number 5",
         a: "option A",
         b: "option B",
         c: "option C",
-        d: "option D"}
+        d: "option D",
+        ans: ""}
 ];
 
 startButton.addEventListener("click", function(){
@@ -60,11 +70,10 @@ function startTimer(){
 };
 
 function startQuiz(){
-    //define function;
-    for (var i = 0; i < questions.length; i++) {
-        console.log(questions[i])
-        askQuestion(questions[i])
-    }
+    i = 0;
+    console.log(questions[i]);
+    askQuestion(questions[i]);
+    
 };
 
 function askQuestion(q){
@@ -73,5 +82,8 @@ function askQuestion(q){
     optionB.textContent = (q.b);
     optionC.textContent = (q.c);
     optionD.textContent = (q.d);
+}
 
+function selectOption(){
+    
 }
