@@ -86,4 +86,4 @@ function askQuestion(q){
 
 function selectOption(){
     
-}
+};
