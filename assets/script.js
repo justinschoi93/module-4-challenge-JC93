@@ -11,10 +11,7 @@ var displayWindow = document.querySelector(".display-window");
 var i = 0;
 
 
-optionA.addEventListener("click", checkAnswer);
-optionB.addEventListener("click", checkAnswer);
-optionC.addEventListener("click", checkAnswer);
-optionD.addEventListener("click", checkAnswer);
+
 
 var questions = [{
     number: 1,
@@ -73,13 +70,18 @@ nextQuestion.addEventListener("click", function(){
 //when we are out of questions, clearInterval and save high score. 
 
 function startTimer(){
-    //define function
+    setInterval(){
+
+    }
+    if (timer === 0) {
+        clearInterval();
+    }
 };
 
 function startQuiz(){
     i = 0;
-    console.log(questions[i]);
     askQuestion(questions[i]);
+    
 };
 
 function askQuestion(q){
@@ -88,6 +90,7 @@ function askQuestion(q){
     optionB.textContent = (q.b);
     optionC.textContent = (q.c);
     optionD.textContent = (q.d);
+    activateButtons();
 }
 
 function checkAnswer(e){
@@ -96,9 +99,26 @@ function checkAnswer(e){
      
     if (e.target.textContent === questions[i].ans){
         displayWindow.textContent = "Correct!";
+        
     } else {
         displayWindow.textContent = "incorrect... -5 seconds";
     }
 
-    //deactivate answer buttons
+    deactivateButtons();
 };
+
+function activateButtons(){
+    optionA.addEventListener("click", checkAnswer);
+    optionB.addEventListener("click", checkAnswer);
+    optionC.addEventListener("click", checkAnswer);
+    optionD.addEventListener("click", checkAnswer);
+}
+
+function deactivateButtons(){
+    console.log('deactivated');
+    optionA.removeEventListener("click", checkAnswer);
+    optionB.removeEventListener("click", checkAnswer);
+    optionC.removeEventListener("click", checkAnswer);
+    optionD.removeEventListener("click", checkAnswer);
+}
+
