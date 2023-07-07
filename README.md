@@ -10,11 +10,9 @@
 
 ## Description 
 
-[Visit the Deployed Site](https://youtu.be/BFyeuLhjcPY)
+[Visit the Deployed Site](https://justinschoi93.github.io/module-4-challenge-JC93/gi)
 
 I created an online quiz using HTML, CSS and JavaScript. No starter code was used. The entire project was made from scratch. 
-
-
 
 
 ## Usage 
@@ -23,9 +21,10 @@ Click the start button start, click on the answer choice to choose an answer, cl
 
 You will be rewarded 10 points for each correct answer, and deducted 5 seconds of quiz time for each incorrect answer. You may answer each question once per quiz. 
 
-```md
-![alt text](assets/images/screenshot.png)
-```
+
+![alt text](./assets/screenshot1.jpg)
+![alt text](./assets/screenshot2.jpg)
+
 ## Acceptance Criteria
 
 GIVEN I am taking a code quiz
