@@ -1,3 +1,5 @@
+// variables declared and defined
+
 var scoreEl = document.querySelector('.score');
 var score = localStorage.getItem('currentScore');
 var highScoresList = document.querySelector('.high-scores-list');
@@ -5,6 +7,7 @@ scoreEl.textContent = score;
 var highScores = JSON.parse(localStorage.getItem('highScores'));
 var currentIndex = localStorage.getItem('currentIndex');
 var resetButton = document.querySelector('.reset');
+// eventlistener added to document to recognize push of return key
 var returnKey = document.addEventListener('keydown', function(event){
     if (event.key === 'Enter') {
         var nameInput = document.querySelector(".name-input").value;
@@ -15,7 +18,7 @@ var returnKey = document.addEventListener('keydown', function(event){
 
     }
 })
-
+// event Listener added to reset button
 resetButton.addEventListener('click', function(){
     highScores = [
         {name: '',
@@ -39,6 +42,7 @@ resetButton.addEventListener('click', function(){
 // console.log(nameInput);
 // console.log(currentIndex);
 
+// functions defined
 function refreshList(){
     highScores = JSON.parse(localStorage.getItem('highScores'));
     for (let i = 0; i < highScores.length; i++){
