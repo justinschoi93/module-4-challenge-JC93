@@ -1,8 +1,8 @@
+// variables declared and defined
 var timeLeft = 60;
 var points = 0;
 var scoreEl = document.querySelector(".score");
 var startButton = document.getElementById("start");
-// var highScoresButton = document.getElementById("high-score-button");
 var nextQuestion = document.getElementById("next");
 var questionWindow = document.querySelector(".question-window");
 var nameInput = document.querySelector(".name-input");
@@ -13,6 +13,8 @@ var optionD = document.querySelector(".option-4");
 var displayWindow = document.querySelector(".display-window");
 var timeLeftWindow = document.querySelector(".seconds");
 var i = 0;
+
+// high Score board set to blank
 var highScores = [
     {name: '',
     score: 0},
@@ -29,12 +31,14 @@ var highScores = [
     {name: '',
     score: 0}
 ];
-// localStorage.setItem('highScores', JSON.stringify(highScores));
+
+
+//High Scores stored and retreived from localStorage
 highScores = JSON.parse(localStorage.getItem('highScores'));
 
 
 
-
+//questions and answers defined
 var questions = [{
     number: 1,
     question: "What shape is the Earth?",
@@ -73,7 +77,7 @@ var questions = [{
         d: "martians",
         ans: "chimpanzees"}
 ];
-
+//eventListeners added to buttons
 startButton.addEventListener("click", function(){
     startTimer();
     startQuiz();
@@ -85,12 +89,8 @@ nextQuestion.addEventListener("click", function(){
     displayWindow.textContent = "";
     askQuestion(questions[i]);
 });
-//set interval so every second, the timer goes down by 1
-//when timer reaches 0, clear interval and save high score. 
-//define askQuestions function
-//when correct answer is selected, a point is rewarded. 
-//when an incorrect answer is selected, 10 seconds are deducted from the timer. 
-//when we are out of questions, clearInterval and save high score. 
+
+//functions defined
 
 function startTimer(){
     var timeInterval = setInterval(function(){
