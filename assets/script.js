@@ -34,7 +34,7 @@ var highScores = [
 
 
 //High Scores stored and retreived from localStorage
-highScores = JSON.parse(localStorage.getItem('highScores'));
+
 
 
 
@@ -81,6 +81,7 @@ var questions = [{
 startButton.addEventListener("click", function(){
     startTimer();
     startQuiz();
+    highScores = JSON.parse(localStorage.getItem('highScores'));
 })
 
 
@@ -117,7 +118,7 @@ function startQuiz(){
     scoreEl.textContent = points;
     displayWindow.textContent = '';
     askQuestion(questions[i]);
-    
+    highScores = localStorage.getItem(JSON.parse('highScores'));
 };
 
 function askQuestion(q){
