@@ -7,23 +7,29 @@
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+    <!-- header that displays points won, and time left -->
     <header>
-        <div class="timer">Timer:<span class="seconds"></span></div>
+        <div class="point-window"><span class="score">0</span> points</div>
+        <div class="timer">Timer:<span class="seconds">60</span> seconds left</div>
     </header>
-    <button id="high-score-button">View High Scores</button>
-    <button id="start">Start Quiz</button>
-
+    <!-- start button, and a button that opens up a new tab with the high scores -->
+    <section class="buttons">
+        <a href="./assets/highscores.html" target="_blank"><button id="high-score-button">View High Scores</button></a>
+        <button id="start">Start Quiz</button>
+    </section>
+    
+<!-- Questions and answer options -->
     <section class = "quiz">
-        <div class="question-window">Question goes here!</div>
-        <p class="option option-1">a</p>
-        <p class="option option-2">b</p>
-        <p class="option option-3">c</p>
-        <p class="option option-4">d</p>
-
+        <div class="question-window">Start the Quiz!</div>
+        <p class="options option-1"></p>
+        <p class="options option-2"></p>
+        <p class="options option-3"></p>
+        <p class="options option-4"></p>
+<!-- a display window for texts and messages -->
     </section>
     <div class="display-window"></div>
     
-    
+<!-- a button that takes you to the next question -->
     <button id="next">Next</button>
 
     <script src="./assets/script.js"></script>
