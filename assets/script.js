@@ -1,66 +1,89 @@
-var timer = 60;
+var timeLeft = 60;
+var points = 0;
+var scoreEl = document.querySelector(".score");
 var startButton = document.getElementById("start");
-var highScoresButton = document.getElementById("high-score-button");
+// var highScoresButton = document.getElementById("high-score-button");
 var nextQuestion = document.getElementById("next");
 var questionWindow = document.querySelector(".question-window");
+var nameInput = document.querySelector(".name-input");
 var optionA = document.querySelector(".option-1");
 var optionB = document.querySelector(".option-2");
 var optionC = document.querySelector(".option-3");
 var optionD = document.querySelector(".option-4");
 var displayWindow = document.querySelector(".display-window");
+var timeLeftWindow = document.querySelector(".seconds");
 var i = 0;
+var highScores = [
+    {name: '',
+    score: 0},
+
+    {name: '',
+    score: 0},
+
+    {name: '',
+    score: 0},
+
+    {name: '',
+    score: 0},
+
+    {name: '',
+    score: 0}
+];
+// localStorage.setItem('highScores', JSON.stringify(highScores));
+highScores = JSON.parse(localStorage.getItem('highScores'));
 
 
 
 
 var questions = [{
     number: 1,
-    question: "Question Number 1",
-    a: "option A",
-    b: "option B",
-    c: "option C",
-    d: "option D",
-    ans: "option D"}, 
+    question: "What shape is the Earth?",
+    a: "Flat and rectangular. Like a map.",
+    b: "Flat, but round. Like the photos.",
+    c: "Spherical.",
+    d: "There's no way to be certain...",
+    ans: "Spherical."}, 
 
     {number: 2,
-        question: "Question Number 2",
-        a: "option A",
-        b: "option B",
-        c: "option C",
-        d: "option D",
-        ans: "option D"},
+        question: "How old is the Earth?",
+        a: "2023 years old.",
+        b: "10,000 years old.",
+        c: "7.5 million years old.",
+        d: "4.5 billion years old.",
+        ans: "4.5 billion years old."},
     {number: 3,
-        question: "Question Number 3",
-        a: "option A",
-        b: "option B",
-        c: "option C",
-        d: "option D",
-        ans: ""},
+        question: "How long has it been since the dinosaurs went extinct?",
+        a: "10 thousand years.",
+        b: "65 million years.",
+        c: "7 billion years.",
+        d: "2023 years.",
+        ans: "65 million years."},
     {number: 4,
-        question: "Question Number 4",
-        a: "option A",
-        b: "option B",
-        c: "option C",
-        d: "option D",
-        ans: "option D"},
+        question: "How long have humans (homo-sapiens) been around?",
+        a: "300 thousand years.",
+        b: "2023 years.",
+        c: "2 million years.",
+        d: "10 thousand years.",
+        ans: "300 thousand years."},
     {number: 5,
-        question: "Question Number 5",
-        a: "option A",
-        b: "option B",
-        c: "option C",
-        d: "option D",
-        ans: "option D"}
+        question: "We are most closely related to...",
+        a: "chimpanzees",
+        b: "dolphins",
+        c: "mermaids",
+        d: "martians",
+        ans: "chimpanzees"}
 ];
 
 startButton.addEventListener("click", function(){
     startTimer();
     startQuiz();
 })
-highScoresButton.addEventListener("click", function(){});
+
+
 nextQuestion.addEventListener("click", function(){
     i++;
-    askQuestion(questions[i]);
     displayWindow.textContent = "";
+    askQuestion(questions[i]);
 });
 //set interval so every second, the timer goes down by 1
 //when timer reaches 0, clear interval and save high score. 
@@ -70,27 +93,45 @@ nextQuestion.addEventListener("click", function(){
 //when we are out of questions, clearInterval and save high score. 
 
 function startTimer(){
-    setInterval(){
+    var timeInterval = setInterval(function(){
+        if (i == questions.length){
+            clearInterval(timeInterval);
+        }
+        if (timeLeft > 0) {
+            timeLeft--;
+        } else {
+            timeLeft = 0;
+            clearInterval(timeInterval);
+            endGame();
+        }
+        timeLeftWindow.textContent = timeLeft;
+    }, 1000)
 
-    }
-    if (timer === 0) {
-        clearInterval();
-    }
+
 };
 
 function startQuiz(){
     i = 0;
+    timeLeft = 60;
+    points = 0;
+    scoreEl.textContent = points;
+    displayWindow.textContent = '';
     askQuestion(questions[i]);
     
 };
 
 function askQuestion(q){
-    questionWindow.textContent = (q.question);
-    optionA.textContent = (q.a);
-    optionB.textContent = (q.b);
-    optionC.textContent = (q.c);
-    optionD.textContent = (q.d);
-    activateButtons();
+    if (i < questions.length){
+        questionWindow.textContent = (q.question);
+        optionA.textContent = (q.a);
+        optionB.textContent = (q.b);
+        optionC.textContent = (q.c);
+        optionD.textContent = (q.d);
+        activateButtons();
+    } else {
+        endGame();
+    }
+    
 }
 
 function checkAnswer(e){
@@ -99,9 +140,11 @@ function checkAnswer(e){
      
     if (e.target.textContent === questions[i].ans){
         displayWindow.textContent = "Correct!";
-        
+        points+=10;
+        scoreEl.textContent = points;
     } else {
         displayWindow.textContent = "incorrect... -5 seconds";
+        timeLeft-=5;
     }
 
     deactivateButtons();
@@ -122,3 +165,25 @@ function deactivateButtons(){
     optionD.removeEventListener("click", checkAnswer);
 }
 
+function endGame(){
+    deactivateButtons();
+    displayWindow.textContent = "You have answered all of the questions! The quiz is over!";
+    checkHighScores();
+    localStorage.setItem("currentScore", points);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    
+}
+
+function checkHighScores () {
+    for (let i = 0; i < highScores.length; i++) {
+        if (points > highScores[i].score){
+            highScores.pop();
+            highScores.splice(i,0,{name: '', score: points});
+            localStorage.setItem('currentIndex', i);
+            break;
+            
+        }
+        
+    }
+    console.log(highScores);
+}
